@@ -1,38 +1,21 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
 
-SET(Services 
-        "application"
-        "base"
-        "content"
-        "location"
-        "media"
-        "messaging"
-        "network"
-        "social"
-        "telephony"
-        "system"
-   )
-
 # project
 SET(project_prefix "capi")
-SET(prefix "/usr")
-SET(version "0.0.1")
-SET(maintainer "Seungkeun Lee <sngn.lee@samsung.com>, Kangho Hur<kagho.hur@samsung.com>")
+SET(maintainer "Jeongmo Yang <jm80.yang@samsung.com>, Hyuntae Kim <ht1211.kim@samsung.com>, Taeyoung Chung <ty83.chung@samsung.com>, Seokhoon Lee <andy.shlee@samsung.com>, Sejong Park <sejong123.park@samsung.com>")
 SET(description "A Camera library in Tizen Native API")
 SET(service "media")
 SET(submodule "camera")
 
 # for package file
-SET(dependents "dlog audio-session-mgr mm-camcorder capi-base-common capi-media-tool gstreamer-0.10 libtbm evas ecore elementary")
-SET(pc_dependents "mm-camcorder capi-base-common capi-media-tool gstreamer-0.10 libtbm evas ecore elementary")
+SET(dependents "dlog audio-session-mgr mm-camcorder capi-base-common capi-media-tool gstreamer-1.0 libtbm evas elementary vconf")
+SET(pc_dependents "mm-camcorder capi-base-common capi-media-tool gstreamer-1.0 libtbm evas ecore elementary")
 
 SET(fw_name "${project_prefix}-${service}-${submodule}")
 
 PROJECT(${fw_name})
 
-SET(CMAKE_INSTALL_PREFIX ${prefix})
 SET(PREFIX ${CMAKE_INSTALL_PREFIX})
-SET(VERSION ${version})
 
 SET(INC_DIR include)
 INCLUDE_DIRECTORIES(${INC_DIR})
@@ -43,14 +26,13 @@ FOREACH(flag ${${fw_name}_CFLAGS})
     SET(EXTRA_CFLAGS "${EXTRA_CFLAGS} ${flag}")
 ENDFOREACH(flag)
 
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} -fPIC -Wall -Wcast-align -Wcast-qual -Wextra -Wno-array-bounds -Wno-empty-body -Wno-ignored-qualifiers -Wno-unused-parameter -Wshadow -Wwrite-strings -Wswitch-default -Wno-unused-but-set-parameter -Wno-unused-but-set-variable")
+SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} -fPIC -Wall -Wextra -Wno-array-bounds -Wno-empty-body -Wno-ignored-qualifiers -Wno-unused-parameter -Wshadow -Wwrite-strings -Wswitch-default -Wno-unused-but-set-parameter -Wno-unused-but-set-variable")
 SET(CMAKE_C_FLAGS_DEBUG "-O0 -g")
 
 IF("${ARCH}" STREQUAL "arm")
     ADD_DEFINITIONS("-DTARGET")
 ENDIF("${ARCH}" STREQUAL "arm")
 
-ADD_DEFINITIONS("-DPREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
 ADD_DEFINITIONS("-DTIZEN_DEBUG")
 
 SET(CMAKE_EXE_LINKER_FLAGS "-Wl,--as-needed -Wl,--rpath=/usr/lib")
@@ -87,7 +69,7 @@ CONFIGURE_FILE(
 )
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/${fw_name}.pc DESTINATION lib/pkgconfig)
 
-#ADD_SUBDIRECTORY(test)
+ADD_SUBDIRECTORY(test)
 
 IF(UNIX)
 

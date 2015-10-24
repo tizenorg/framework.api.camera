@@ -137,7 +137,7 @@ typedef enum
 typedef enum
 {
 	CAMERA_ROTATION_NONE,	/**< No rotation */
-	CAMERA_ROTATION_90,	/**< 90 degree rotation */
+	CAMERA_ROTATION_90,		/**< 90 degree rotation */
 	CAMERA_ROTATION_180,	/**< 180 degree rotation */
 	CAMERA_ROTATION_270,	/**< 270 degree rotation */
 } camera_rotation_e;
@@ -1329,7 +1329,6 @@ int camera_get_capture_resolution(camera_h camera, int *width, int *height);
  * @}
  */
 
-
 /**
  * @addtogroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
  * @{
@@ -1742,7 +1741,6 @@ int camera_set_focus_changed_cb(camera_h camera, camera_focus_changed_cb callbac
  */
 int camera_unset_focus_changed_cb(camera_h camera);
 
-
 /**
  * @brief Registers a callback function to be called when an asynchronous operation error occurs.
  * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
@@ -1791,6 +1789,7 @@ int camera_unset_error_cb(camera_h camera);
 
 /**
  * @brief Called to get each supported auto-focus mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported auto-focus mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1801,6 +1800,7 @@ typedef bool (*camera_attr_supported_af_mode_cb)(camera_attr_af_mode_e mode, voi
 
 /**
  * @brief Called to get each supported exposure mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported exposure mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1813,6 +1813,7 @@ typedef bool (*camera_attr_supported_exposure_mode_cb)(camera_attr_exposure_mode
 
 /**
  * @brief Called to get each supported ISO mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] iso The supported ISO mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1823,6 +1824,7 @@ typedef bool (*camera_attr_supported_iso_cb)(camera_attr_iso_e iso, void *user_d
 
 /**
  * @brief Called to get each supported white balance.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] wb The supported white balance mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1835,6 +1837,7 @@ typedef bool (*camera_attr_supported_whitebalance_cb)(camera_attr_whitebalance_e
 
 /**
  * @brief Called to get each supported effect mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] effect The supported effect mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1846,6 +1849,7 @@ typedef bool (*camera_attr_supported_effect_cb)(camera_attr_effect_mode_e effect
 
 /**
  * @brief Called to get each supported scene mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported scene mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1858,6 +1862,7 @@ typedef bool (*camera_attr_supported_scene_mode_cb)(camera_attr_scene_mode_e mod
 
 /**
  * @brief Called to get each supported flash mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported flash mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1869,6 +1874,7 @@ typedef bool (*camera_attr_supported_flash_mode_cb)(camera_attr_flash_mode_e mod
 
 /**
  * @brief Called to get each supported FPS mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported FPS mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
@@ -1879,6 +1885,7 @@ typedef bool (*camera_attr_supported_fps_cb)(camera_attr_fps_e fps, void *user_d
 
 /**
  * @brief Called to get each supported stream flip mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported stream flip mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
@@ -1889,6 +1896,7 @@ typedef bool (*camera_attr_supported_stream_flip_cb)(camera_flip_e flip, void *u
 
 /**
  * @brief Called to get each supported stream rotation mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported stream rotation mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
@@ -1899,6 +1907,7 @@ typedef bool (*camera_attr_supported_stream_rotation_cb)(camera_rotation_e rotat
 
 /**
  * @brief Called to get each supported theater mode.
+ * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @param[in] mode The supported theater mode
  * @param[in] user_data The user data passed from the foreach function
  * @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
@@ -1976,6 +1985,29 @@ int camera_attr_get_preview_fps(camera_h camera, camera_attr_fps_e *fps);
  */
 int camera_attr_foreach_supported_fps(camera_h camera, camera_attr_supported_fps_cb callback,
         void *user_data);
+
+/**
+ * @brief Retrieves all supported FPS modes by invoking the callback function once for each supported FPS mode.
+ * @since_tizen 2.4
+ * @param[in] camera The handle to the camera
+ * @privlevel public
+ * @privilege %http://tizen.org/privilege/camera
+ * @param[in] width Required preview resolution's width
+ * @param[in] height Required preview resolution's height
+ * @param[in] callback The callback function to invoke
+ * @param[in] user_data The user data to be passed to the callback function
+ * @return @c 0 on success, otherwise a negative error value
+ * @retval #CAMERA_ERROR_NONE Successful
+ * @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ * @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
+ * @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
+ * @post This function invokes camera_attr_supported_fps_cb() repeatly to get each supported FPS mode.
+ * @see	camera_attr_set_preview_fps()
+ * @see	camera_attr_get_preview_fps()
+ * @see	camera_attr_supported_fps_cb()
+ */
+int camera_attr_foreach_supported_fps_by_resolution(camera_h camera,  int width, int height,
+	camera_attr_supported_fps_cb callback ,void *user_data);
 
 /**
  * @}
@@ -2910,6 +2942,8 @@ int camera_attr_remove_geotag(camera_h camera);
  * @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
  * @privlevel public
  * @privilege %http://tizen.org/privilege/camera
+ * @remarks Since 2.4, while setting the flash mode, if the flash was preempted by other APIs,\n
+            then this function returns #CAMERA_ERROR_DEVICE_BUSY error.
  * @param[in] camera The handle to the camera
  * @param[in] mode The flash mode
  * @return @c 0 on success, otherwise a negative error value
@@ -2917,6 +2951,7 @@ int camera_attr_remove_geotag(camera_h camera);
  * @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
  * @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
  * @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
+ * @retval #CAMERA_ERROR_DEVICE_BUSY The flash was preempted by other API
  * @see	camera_attr_foreach_supported_flash_mode()
  * @see camera_attr_get_flash_mode()
  */

@@ -27,6 +27,81 @@ extern "C" {
   * @brief This file contains the Camera Product-internal API for framework, related structures and enumerations.
   */
 
+
+/**
+ * @internal
+ * @addtogroup CAPI_MEDIA_CAMERA_ATTRIBUTES_MODULE_INTERNAL
+ * @{
+ */
+
+/**
+ * @brief Enumeration for the flash state.
+ * @since_tizen 2.4
+ */
+typedef enum
+{
+    CAMERA_ATTR_FLASH_STATE_OFF = 0,          /**< Off state */
+    CAMERA_ATTR_FLASH_STATE_ON,               /**< On state */
+} camera_attr_flash_state_e;
+
+/**
+ * @}
+ */
+
+
+/**
+ * @internal
+ * @addtogroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE_INTERNAL
+ * @{
+ */
+
+
+/**
+ * @brief Enumerations of the camera display plane type.
+ * @since_tizen 2.4
+ */
+typedef enum
+{
+    CAMERA_DISPLAY_SCALER_MAIN = 0,       /**< Main video plane */
+    CAMERA_DISPLAY_SCALER_SUB = 1         /**< Sub scaler plane */
+} camera_display_scaler_e;
+
+/**
+ * @}
+ */
+
+
+/**
+ * @internal
+ * @addtogroup CAPI_MEDIA_CAMERA_ATTRIBUTES_MODULE_INTERNAL
+ * @{
+ */
+
+
+/**
+ * @brief Gets the flash state.
+ * @since_tizen 2.4
+ * @privlevel platform
+ * @privilege %http://tizen.org/privilege/camera
+ * @remarks This API returns state of flash controlled by camera API.
+ *          It will return CAMERA_ATTR_FLASH_STATE_OFF if flash turned on by device API.
+ * @param[out] state The flash state
+ * @return @c 0 on success, otherwise a negative error value
+ * @retval #CAMERA_ERROR_NONE Successful
+ * @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ * @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
+ * @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
+ * @see camera_attr_foreach_supported_flash_mode()
+ * @see camera_attr_set_flash_mode()
+ * @see camera_attr_get_flash_mode()
+ */
+int camera_attr_get_flash_state(camera_attr_flash_state_e *state);
+
+/**
+ * @}
+ */
+
+
 /**
  * @internal
  * @addtogroup CAPI_MEDIA_CAMERA_X11_DISPLAY_MODULE
@@ -259,6 +334,189 @@ int camera_set_x11_display_pixmap_error_cb(camera_h camera, camera_x11_pixmap_er
  * @see camera_set_x11_display_pixmap_error_cb()
  */
 int camera_unset_x11_display_pixmap_error_cb(camera_h camera);
+
+/**
+ * @}
+ */
+
+
+/**
+ * @internal
+ * @addtogroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE_INTERNAL
+ * @{
+ */
+
+/**
+ * @brief Sets the display scaler
+ *
+ * @param[in] camera The handle to the camera
+ * @param[in] plane The display plane
+ * @return	    0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ */
+int camera_set_display_scaler(camera_h camera, camera_display_scaler_e plane);
+
+/**
+ * @brief Gets the display scaler
+ *
+ * @param[in] camera The handle to the camera
+ * @param[out] plane The display plane
+ * @return	    0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ */
+int camera_get_display_scaler(camera_h camera, camera_display_scaler_e *plane);
+
+/**
+ * @}
+ */
+
+/**
+ * @internal
+ * @addtogroup CAPI_MEDIA_CAMERA_ATTRIBUTES_MODULE_INTERNAL
+ * @{
+ */
+
+/**
+ * @brief Sets the pan level.
+ * @details The range for pan level is getting from camera_attr_get_pan_range(). If @a pan is out of range, #CAMERA_ERROR_INVALID_PARAMETER error occurred.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[in] pan      The pan level
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_get_pan()
+ * @see camera_attr_get_pan_range()
+ */
+int camera_attr_set_pan(camera_h camera, int pan);
+
+/**
+ * @brief Sets the tilt level.
+ * @details The range for tilt level is getting from camera_attr_get_tilt_range(). If @a tilt is out of range, #CAMERA_ERROR_INVALID_PARAMETER error occurred.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[in] tilt      The tilt level
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_get_tilt()
+ * @see camera_attr_get_tilt_range()
+ */
+int camera_attr_set_tilt(camera_h camera, int tilt);
+
+/**
+ * @brief Gets the pan level.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[out] pan     The pan level
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_set_pan()
+ * @see camera_attr_get_pan_range()
+ */
+int camera_attr_get_pan(camera_h camera, int *pan);
+
+/**
+ * @brief Gets the tilt level.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[out] tilt     The tilt level
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_set_tilt()
+ * @see camera_attr_get_tilt_range()
+ */
+int camera_attr_get_tilt(camera_h camera, int *tilt);
+
+/**
+ * @brief Gets the available pan level.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[out] min      The minimum pan level
+ * @param[out] max      The maximum pan level
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_set_pan()
+ * @see camera_attr_get_pan()
+ */
+int camera_attr_get_pan_range(camera_h camera, int *min, int *max);
+
+/**
+ * @brief Gets the available tilt level.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[out] min      The minimum tilt level
+ * @param[out] max      The maximum tilt level
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_set_tilt()
+ * @see camera_attr_get_tilt()
+ */
+int camera_attr_get_tilt_range(camera_h camera, int *min, int *max);
+
+/**
+ * @brief Sets the bitrate for encoded preview stream.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[in] bitrate   The bps of encoded preview stream
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_get_encoded_preview_bitrate()
+ */
+int camera_attr_set_encoded_preview_bitrate(camera_h camera, int bitrate);
+
+/**
+ * @brief Gets the bitrate for encoded preview stream.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[out] bitrate  The bps of encoded preview stream
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_set_encoded_preview_bitrate()
+ */
+int camera_attr_get_encoded_preview_bitrate(camera_h camera, int *bitrate);
+
+/**
+ * @brief Sets the I-frame interval for encoded preview stream.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[in] interval  The I-frame interval of encoded preview stream (milisecond)
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_get_encoded_preview_iframe_interval()
+ */
+int camera_attr_set_encoded_preview_iframe_interval(camera_h camera, int interval);
+
+/**
+ * @brief Gets the I-frame interval for encoded preview stream.
+ *
+ * @param[in] camera    The handle to the camera
+ * @param[out] interval  The I-frame interval of encoded preview stream (milisecond)
+ * @return        0 on success, otherwise a negative error value.
+ * @retval      #CAMERA_ERROR_NONE Successful
+ * @retval      #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+ *
+ * @see camera_attr_set_encoded_preview_iframe_interval()
+ */
+int camera_attr_get_encoded_preview_iframe_interval(camera_h camera, int *interval);
 
 /**
  * @}

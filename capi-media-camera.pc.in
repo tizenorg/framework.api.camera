@@ -1,4 +1,3 @@
-
 # Package Information for pkg-config
 
 prefix=@PREFIX@
@@ -7,8 +6,8 @@ libdir=/usr/lib
 includedir=/usr/include/media
 
 Name: @PC_NAME@
-Description: @PACKAGE_DESCRIPTION@
-Version: @VERSION@
+Description: @description@
+Version: @FULLVER@
 Requires: @PC_REQUIRED@ 
 Libs: -L${libdir} @PC_LDFLAGS@
 Cflags: -I${includedir}

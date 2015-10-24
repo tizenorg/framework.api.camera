@@ -1,12 +1,12 @@
 Name:       capi-media-camera
 Summary:    A Camera library in Tizen C API
-Version:    0.1.77
+Version:    0.1.88
 Release:    0
-Group:      libdevel
+Group:      Multimedia/API
 License:    Apache-2.0
 Source0:    %{name}-%{version}.tar.gz
 BuildRequires:  cmake
-BuildRequires:  pkgconfig(gstreamer-0.10)
+BuildRequires:  pkgconfig(gstreamer-1.0)
 BuildRequires:  pkgconfig(dlog)
 BuildRequires:  pkgconfig(mm-camcorder)
 BuildRequires:  pkgconfig(audio-session-mgr)
@@ -14,23 +14,27 @@ BuildRequires:  pkgconfig(capi-base-common)
 BuildRequires:  pkgconfig(capi-media-tool)
 BuildRequires:  pkgconfig(libtbm)
 BuildRequires:  pkgconfig(evas)
-BuildRequires:  pkgconfig(ecore)
 BuildRequires:  pkgconfig(elementary)
+BuildRequires:  pkgconfig(vconf)
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 
+
 %description
+A Camera library in Tizen C API.
 
 
 %package devel
 Summary:  A Camera library in Tizen C API (Development)
-Group:    TO_BE/FILLED_IN
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig(libtbm)
 Requires: pkgconfig(capi-media-tool)
 
-%description devel
 
+%description devel
+A Camera library in Tizen C API.
+
+Development related files.
 
 
 %prep
@@ -47,6 +51,7 @@ cmake . -DCMAKE_INSTALL_PREFIX=/usr -DFULLVER=%{version} -DMAJORVER=${MAJORVER}
 
 make %{?jobs:-j%jobs}
 
+
 %install
 rm -rf %{buildroot}
 %make_install
@@ -55,18 +60,19 @@ cp LICENSE.APLv2 %{buildroot}/usr/share/license/%{name}
 
 %post -p /sbin/ldconfig
 
+
 %postun -p /sbin/ldconfig
+
 
 %files
 %manifest capi-media-camera.manifest
 %{_libdir}/libcapi-media-camera.so.*
 %{_datadir}/license/%{name}
-
+%{_bindir}/multimedia_camera_test
 
 %files devel
 %{_includedir}/media/camera.h
 %{_includedir}/media/camera_internal.h
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/libcapi-media-camera.so
-
 
