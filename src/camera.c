@@ -1541,7 +1541,7 @@ int camera_is_display_visible(camera_h camera, bool* visible)
 					  MMCAM_DISPLAY_VISIBLE, &result,
 					  NULL);
 	if( ret == 0)
-		*visible = result;
+		*visible = (bool)result;
 	return __convert_camera_error_code(__func__, ret);
 }
 
@@ -2787,19 +2787,23 @@ int camera_attr_get_scene_mode(camera_h camera,  camera_attr_scene_mode_e *mode)
 }
 
 
-int camera_attr_is_enabled_tag(camera_h camera,  bool *enable)
+int camera_attr_is_enabled_tag(camera_h camera, bool *enabled)
 {
-	if( camera == NULL || enable == NULL){
+	if( camera == NULL || enabled == NULL){
 		LOGE("INVALID_PARAMETER(0x%08x)",CAMERA_ERROR_INVALID_PARAMETER);
 		return CAMERA_ERROR_INVALID_PARAMETER;
 	}
 
 	int ret;
+	int tag_enabled = false;
 	camera_s * handle = (camera_s*)camera;
 
 	ret = mm_camcorder_get_attributes(handle->mm_handle, NULL,
-					  MMCAM_TAG_ENABLE, enable,
+					  MMCAM_TAG_ENABLE, &tag_enabled,
 					  NULL);
+
+	if (ret == MM_ERROR_NONE)
+		*enabled = (bool)tag_enabled;
 
 	return __convert_camera_error_code(__func__, ret);
 }
@@ -3770,7 +3774,7 @@ int camera_attr_is_enabled_auto_contrast(camera_h camera, bool *enabled)
 	camera_s * handle = (camera_s*)camera;
 	ret = mm_camcorder_get_attributes(handle->mm_handle ,NULL, MMCAM_CAMERA_WDR , &mode, NULL);
 	if( ret == MM_ERROR_NONE )
-		*enabled = mode;
+		*enabled = (bool)mode;
 	return __convert_camera_error_code(__func__, ret);
 }
 
